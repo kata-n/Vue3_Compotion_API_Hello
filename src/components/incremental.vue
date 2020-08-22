@@ -4,22 +4,26 @@
   </button>
 </template>
 
-<script lang="ts">
-import { defineComponent } from '@vue/composition-api'
+<script>
+import { reactive, computed } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const state = reactive<{ messageOne: string }>({
-      messageOne: 'Hello'
-    });
-    const messageTwo = ref<string>("こんにちは");
+export default {
+  setup () {
+    const state = reactive({
+      count: 0,
+      double: computed(() => state.count * 2)
+    })
+
+    function increment () {
+      state.count++
+    }
 
     return {
       state,
-      messageTwo
-    };
+      increment
+    }
   }
-});
+}
 </script>
 
 <style scoped>
